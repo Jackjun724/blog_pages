@@ -7,7 +7,3 @@ export function login(param){
 export function getDashboardData () {
   return Axios.get('manage')
 }
-
-export function logout(){
-  return post('/logout')
-}

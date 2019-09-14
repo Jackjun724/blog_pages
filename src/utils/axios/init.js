@@ -2,13 +2,13 @@ import Axios from 'axios'
 import {getToken} from '../auth/index'
 import {Notification} from 'element-ui'
 import router from '@/router/index'
+import Constants from '@/const/index'
 
 //设置默认API请求地址
-if (process.env.NODE_ENV === 'development') {
-  Axios.defaults.baseURL = 'http://localhost:7999/api/'
-} else if (process.env.NODE_ENV === 'production') {
-  Axios.defaults.baseURL = 'http://www.retzero.com/api/'
-}
+Axios.defaults.baseURL = Constants.getHomeUrl() + 'api'
+
+//用于处理 get中的array
+const qs = require('qs')
 
 //设置axios超时 默认请求头
 Axios.defaults.timeout = 60000
@@ -17,6 +17,10 @@ Axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 // 请求拦截器
 Axios.interceptors.request.use(
   config => {
+    if (config.method === 'get') {
+      //如果是get请求，且params是数组类型如arr=[1,2]，则转换成arr=1&arr=2
+      config.paramsSerializer = params => qs.stringify(params, {arrayFormat: 'repeat'})
+    }
     const token = getToken()
     token && token!=='' && (config.headers.Authorization = token)
     return config
@@ -38,7 +42,7 @@ Axios.interceptors.response.use(
   },
   // 服务器状态码不是200的情况
   error => {
-    if (error.response.status) {
+    if (error.response && error.response.status) {
       switch (error.response.status) {
         // 401: 未登录
         // 未登录则跳转登录页面，并携带当前页面的路径

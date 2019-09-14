@@ -77,12 +77,11 @@
               username: this.loginForm.username,
               password: this.loginForm.password
             }
-            this.$fetch.apiBuilding.login(param).then(resp => {
-              _this.$message(resp.data.data)
-              // setToken(response.data.data.token)
-              // this.$router.push({path: this.redirect || '/'})
-            }).finally(()=>{
-              this.loading = false
+            _this.$fetch.commonApi.login(param).then(resp => {
+              setToken(resp.data)
+              _this.$router.push({path: this.redirect || '/'})
+            }).finally(() => {
+              _this.loading = false
             })
           }
         })
@@ -101,7 +100,7 @@
     margin: 0 auto;
     position: relative;
     top: 10%;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.22);
   }
 
   .login-container {

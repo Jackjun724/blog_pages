@@ -1,6 +1,6 @@
 // User token
 export default {
-  tokenItemName:'lucky_user_token',
+  tokenItemName: 'user_token',
 
   // 路由表权限等级
   role:{
@@ -9,5 +9,11 @@ export default {
     EDITOR_INDEX:2
   },
 
-  HomeUrl:"http://www.retzero.cn/"
+  getHomeUrl: () => {
+    if (process.env.NODE_ENV === 'development') {
+      return 'http://localhost:7999/'
+    } else if (process.env.NODE_ENV === 'production') {
+      return 'http://www.retzero.com/'
+    }
+  },
 }

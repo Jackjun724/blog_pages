@@ -4,7 +4,7 @@ export default [
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/pages/login/index')
+    component: () => import('@/pages/login/login-index')
   },
   {
     path: '/',
@@ -14,7 +14,7 @@ export default [
       {
         path: 'dashboard',
         name: 'dashboard',
-        component: () => import('@/pages/dashboard/index')
+        component: () => import('@/pages/dashboard/home')
       },
     ]
   }

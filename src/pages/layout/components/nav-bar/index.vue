@@ -53,20 +53,10 @@
           {
             title: '退出',
             do: () => {
-              this.$fetch.apiBuilding.logout().then(resp => {
-                this.$message({
-                  type: "success",
-                  message: resp.data.msg
-                })
-                setToken("")
+              this.$confirm('确定退出登录？', '确定', '取消').then(() => {
+                setToken('')
                 window.location = '/login'
-              }).catch(
-                this.$message({
-                  type: "warning",
-                  message: "退出失败!"
-                })
-              )
-
+              })
             }
           }
         ]

@@ -65,4 +65,8 @@
     border: 1px solid #e0e0e0 !important;
     box-shadow: none !important;
   }
+
+  .el-select-dropdown__wrap.el-scrollbar__wrap {
+    margin-bottom: 0 !important;
+  }
 </style>

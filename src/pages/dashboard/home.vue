@@ -4,10 +4,9 @@
       <el-col :xs="24" :md="8" :xl="8">
         <el-card class="card-data" v-loading="loading">
           <label class="reply">
-            <i
-              class="el-jack-icon-reply"
-              style="font-size: 50px;margin-left:10%;cursor: pointer"
-              @click="$router.push({path:'/reply/list'})">
+            <i @click="$router.push({path:'/reply/list'})"
+               class="el-jack-icon-reply"
+               style="font-size: 50px;margin-left:10%;cursor: pointer">
             </i>
           </label>
           <div class="display">
@@ -67,36 +66,36 @@
       <el-col :md="12" :sm="24" :xs="24">
         <el-card shadow="never" style="min-height:400px;margin-bottom:35px;" v-loading="loading">
           <el-table
-            :data="tableData"
-            style="width: 100%;cursor: pointer"
-            @row-click="clickReply">
+              :data="tableData"
+              @row-click="clickReply"
+              style="width: 100%;cursor: pointer">
             <el-scrollbar>
               <el-table-column
-                prop="date"
-                label="最近回复日期"
-                width="140"
-                column-key="id"
-                fixed
-                :show-overflow-tooltip="true"
+                  :show-overflow-tooltip="true"
+                  column-key="id"
+                  fixed
+                  label="最近回复日期"
+                  prop="date"
+                  width="140"
               >
               </el-table-column>
               <el-table-column
-                prop="name"
-                label="昵称"
-                width="180"
-                :show-overflow-tooltip="true">
+                  :show-overflow-tooltip="true"
+                  label="昵称"
+                  prop="name"
+                  width="180">
               </el-table-column>
               <el-table-column
-                prop="ip"
-                label="IP"
-                width="200"
-                :show-overflow-tooltip="true">
+                  :show-overflow-tooltip="true"
+                  label="IP"
+                  prop="ip"
+                  width="200">
               </el-table-column>
               <el-table-column
-                prop="reply"
-                label="内容"
-                width="200"
-                :show-overflow-tooltip="true">
+                  :show-overflow-tooltip="true"
+                  label="内容"
+                  prop="reply"
+                  width="200">
               </el-table-column>
             </el-scrollbar>
           </el-table>
@@ -108,8 +107,7 @@
 
 <script>
   import wordCloud from 'wordcloud'
-  import echarts from 'echarts'
-  import {setToken} from '@/utils/auth'
+  import ECharts from 'echarts'
 
   export default {
     name: 'dashboard',
@@ -130,10 +128,10 @@
         weekVisits: [],
         weekReply: [],
         wordCloudList: [],
-        loading:true,
-        dayVisitsNum:'',
-        weekVisitsNum:'',
-        replyNum:''
+        loading: true,
+        dayVisitsNum: '',
+        weekVisitsNum: '',
+        replyNum: ''
       }
     },
     methods: {
@@ -145,89 +143,86 @@
       let _this = this
       let _divisor = this.divisor
       //报表
-      this.$fetch.apiBuilding.getDashboardData().then(resp => {
-        let response = resp.data
-        if (response.code === 0) {
-          _this.weekVisits = response.data.charts.weekVisits[0]
-          _this.weekReply = response.data.charts.weekReply[0]
-          _this.wordCloudList = response.data.tags
-          _this.tableData = response.data.reply
-          _this.dayVisitsNum=response.data.dayVisitsNum
-          _this.weekVisitsNum=response.data.weekVisitsNum
-          _this.replyNum=response.data.replyNum
+      this.$fetch.commonApi.getDashboardData().then(resp => {
+        let response = resp.data.data
+        _this.weekVisits = response.charts.weekVisits[0]
+        _this.wordCloudList = response.tags
+        _this.dayVisitsNum = response.dayVisitsNum
+        _this.weekVisitsNum = response.weekVisitsNum
 
-          //处理报表
-          this.chart = echarts.init(document.querySelector('#canvas-chart'))
-          this.chart.setOption({
-            xAxis: {
-              data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-              boundaryGap: false,
-              axisTick: {
-                show: false
-              }
+        //处理报表
+        this.chart = ECharts.init(document.querySelector('#canvas-chart'))
+        this.chart.setOption({
+          xAxis: {
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+            boundaryGap: false,
+            axisTick: {
+              show: false
+            }
+          },
+          grid: {
+            left: 10,
+            right: 10,
+            bottom: 20,
+            top: 30,
+            containLabel: true
+          },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'cross'
             },
-            grid: {
-              left: 10,
-              right: 10,
-              bottom: 20,
-              top: 30,
-              containLabel: true
-            },
-            tooltip: {
-              trigger: 'axis',
-              axisPointer: {
-                type: 'cross'
-              },
-              padding: [5, 10]
-            },
-            yAxis: {
-              axisTick: {
-                show: false
-              }
-            },
-            legend: {
-              data: ['访问量', '回复量']
-            },
-            series: [{
-              name: '访问量', itemStyle: {
-                normal: {
+            padding: [5, 10]
+          },
+          yAxis: {
+            axisTick: {
+              show: false
+            }
+          },
+          legend: {
+            data: ['访问量', '回复量']
+          },
+          series: [{
+            name: '访问量', itemStyle: {
+              normal: {
+                color: '#FF005A',
+                lineStyle: {
                   color: '#FF005A',
+                  width: 2
+                }
+              }
+            },
+            smooth: true,
+            type: 'line',
+            data: _this.weekVisits,
+            animationDuration: 2800,
+            animationEasing: 'cubicInOut'
+          },
+            {
+              name: '回复量',
+              smooth: true,
+              type: 'line',
+              itemStyle: {
+                normal: {
+                  color: '#3888fa',
                   lineStyle: {
-                    color: '#FF005A',
+                    color: '#3888fa',
                     width: 2
+                  },
+                  areaStyle: {
+                    color: '#f3f8ff'
                   }
                 }
               },
-              smooth: true,
-              type: 'line',
-              data: _this.weekVisits,
+              data: _this.weekReply,
               animationDuration: 2800,
-              animationEasing: 'cubicInOut'
-            },
-              {
-                name: '回复量',
-                smooth: true,
-                type: 'line',
-                itemStyle: {
-                  normal: {
-                    color: '#3888fa',
-                    lineStyle: {
-                      color: '#3888fa',
-                      width: 2
-                    },
-                    areaStyle: {
-                      color: '#f3f8ff'
-                    }
-                  }
-                },
-                data: _this.weekReply,
-                animationDuration: 2800,
-                animationEasing: 'quadraticOut'
-              }]
-          })
+              animationEasing: 'quadraticOut'
+            }]
+        })
 
-          //处理字符云
-          let wordCloudExecute = function () {
+        //处理字符云
+        let wordCloudExecute = function () {
+          if (_this.wordCloudList && _this.wordCloudList.length > 0) {
             document.querySelector('#word-cloud').width = document.querySelector('.canvas-container').offsetWidth
             wordCloud(document.getElementById('word-cloud'), {
               list: _this.wordCloudList,
@@ -247,31 +242,20 @@
               }
             })
           }
-          wordCloudExecute()
-
-          //处理尺寸响应
-          window.onresize = () => {
-            _this.chart.resize()
-            wordCloudExecute()
-          }
-          _this.loading=false
-        }else if(response.code === 10){
-          _this.$message({
-            message:'身份信息已过期!请重新登录!',
-            type:'warning'
-          })
-          setToken('')
-          this.$router.push({path:'/login'})
         }
-      })
+        wordCloudExecute()
+
+        //处理尺寸响应
+        window.onresize = () => {
+          _this.chart.resize()
+          wordCloudExecute()
+        }
+      }).finally(() => _this.loading = false)
     },
   }
 </script>
 
 <style scoped rel="stylesheet/scss" lang="scss">
-  .dashboard-container {
-  }
-
   .popper-tips {
     padding: 5px 10px;
     background: #000000e0;

@@ -19,13 +19,12 @@
         @blur="handleInputConfirm"
       >
       </el-input>
-      <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+      <el-button @click="showInput" class="button-new-tag" size="small" v-else>+ 添加新标签</el-button>
     </el-card>
   </div>
 </template>
 
 <script>
-  import {setToken} from '@/utils/auth'
 
   export default {
     name: 'tagsList',
@@ -55,61 +54,34 @@
       },
 
       addTag (tag) {
+        let _this = this
         this.tags.push(tag)
-        this.$fetch.apiBuilding.addTagByName(tag).then(resp => {
-          if (resp.data.code === 10) {
-            _this.$message({
-              message: '身份信息已过期!请重新登录!',
-              type: 'warning'
-            })
-            setToken('')
-            this.$router.push({path: '/login'})
-          }
-        }).catch(() => {
-          _this.$message({
-            message: '网络超时或请求失败!',
-            type: 'warning'
-          })
+        let param = {
+          title: tag
+        }
+        this.$fetch.tagApi.addTagByName(param).then(resp => {
+          _this.$notify.success('增加成功！')
         })
       },
 
       delTag (tag) {
         let _this = this
         this.$confirm('确定删除该标签吗？', '提示：').then(() => {
-          this.tags.splice(this.tags.indexOf(tag), 1)
-          this.$fetch.apiBuilding.delTagByName(tag).then(resp => {
-            if (resp.data.code === 10) {
-              _this.$message({
-                message: '身份信息已过期!请重新登录!',
-                type: 'warning'
-              })
-              setToken('')
-              this.$router.push({path: '/login'})
-            }
-          }).catch(() => {
-            _this.$message({
-              message: '网络超时或请求失败!',
-              type: 'warning'
-            })
+          this.$fetch.tagApi.delTagByName(tag).then(() => {
+            _this.tags.splice(this.tags.indexOf(tag), 1)
+            _this.$notify.success('删除成功！')
           })
-        }).catch(() => {
         })
       }
     },
     created (){
       let _this = this
-      this.$fetch.apiBuilding.getAllTags().then(resp => {
-        if(resp.data.code === 0){
-          resp.data.data.forEach(e=>{_this.tags.push(e.value)})
-          _this.loading=false
-        }else if (resp.data.code === 10) {
-          _this.$message({
-            message: '身份信息已过期!请重新登录!',
-            type: 'warning'
-          })
-          setToken('')
-          this.$router.push({path: '/login'})
-        }
+      this.$fetch.tagApi.getAllTags().then(resp => {
+        resp.data.data.forEach(e => {
+          _this.tags.push(e.value)
+        })
+      }).finally(() => {
+        _this.loading = false
       })
     }
   }

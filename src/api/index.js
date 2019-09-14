@@ -1,10 +1,10 @@
-import * as apiBuilding from './modules/api-list'
+import * as commonApi from './modules/api-list'
 import * as noteApi from './modules/note-api'
 import * as tagApi from './modules/tag-api'
 import * as fileApi from './modules/file-api'
 
 const apiObj = {
-  apiBuilding,
+  commonApi,
   noteApi,
   tagApi,
   fileApi

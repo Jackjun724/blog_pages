@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import layout from '@/pages/layout/index'
-
 //通用路由表
 import constantMapper from './constant'
 
@@ -36,21 +35,21 @@ export const asyncRouterMapper = [
         name:'add-note',
         meta:{title:'文章添加'},
         icon:'el-icon-edit',
-        component:() => import('@/pages/note/add/index')
+        component: () => import('@/pages/note/note-add')
       },
       {
         path:'/note/list',
         name:'note-list',
         icon:'el-jack-icon-list',
         meta:{title:'文章列表'},
-        component:() => import('@/pages/note/list/index')
+        component: () => import('@/pages/note/note-list')
       },
       {
         path:'/note/edit/:id',
         name:'edit-note',
         hidden:true,
         meta:{title:'文章修改'},
-        component:() => import('@/pages/note/add/index')
+        component: () => import('@/pages/note/note-add')
       }
     ]
   },
@@ -67,7 +66,7 @@ export const asyncRouterMapper = [
         name:'reply-list',
         icon:'el-jack-icon-list-rich',
         meta:{title:'评论列表'},
-        component:() => import('@/pages/reply/list/index')
+        component: () => import('@/pages/reply/reply-list')
       },
     ]
   },
@@ -84,7 +83,7 @@ export const asyncRouterMapper = [
         name:'tags-list',
         icon:'el-jack-icon-list-tags',
         meta:{title:'标签列表'},
-        component:() => import('@/pages/tags/list/index')
+        component: () => import('@/pages/tags/tag-list')
       },
     ]
   },
@@ -101,14 +100,7 @@ export const asyncRouterMapper = [
         name:'file-list',
         meta:{title:'文件管理'},
         icon:'el-jack-icon-list-file',
-        component:() => import('@/pages/cloud/file/index')
-      },
-      {
-        path:'/file/image',
-        name:'img-list',
-        icon:'el-jack-icon-list-img',
-        meta:{title:'图片管理'},
-        component:() => import('@/pages/cloud/image/index')
+        component: () => import('@/pages/cloud/file')
       },
     ]
   },
@@ -125,7 +117,7 @@ export const asyncRouterMapper = [
         name:'edit-link',
         meta:{title:'友链管理'},
         icon:'el-jack-icon-link-manager',
-        component:() => import('@/pages/link/index')
+        component: () => import('@/pages/link/friend-link')
       },
     ]
   },
@@ -142,7 +134,7 @@ export const asyncRouterMapper = [
         name:'edit-user',
         meta:{title:'信息修改'},
         icon:'el-jack-icon-user-edit',
-        component:() => import('@/pages/setting/index')
+        component: () => import('@/pages/setting/setting')
       },
     ]
   },
