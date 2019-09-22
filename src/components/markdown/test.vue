@@ -1,63 +1,63 @@
-<template>
-  <show-content :markdown-value="markdownText"></show-content>
-</template>
+<!--<template>-->
+<!--  <show-content :markdown-value="markdownText"></show-content>-->
+<!--</template>-->
 
-<script>
-  import ShowContent from './showContent'
-  export default {
-    name: 'test',
-    components: {ShowContent},
-    data(){
-      return {
-        markdownText:'**这是一次保存内容**\n' +
-          '==标记==\n' +
-          '\n' +
-          '~~中划线~~\n' +
-          '\n' +
-          '<u>++下划线++</u>\n' +
-          '\n' +
-          '^上角标^asd\n' +
-          '\n' +
-          '~下角标~asd\n' +
-          '\n' +
-          '::: hljs-left\n' +
-          '\n' +
-          '居左\n' +
-          '\n' +
-          ':::\n' +
-          '::: hljs-center\n' +
-          '\n' +
-          '居中\n' +
-          '\n' +
-          ':::\n' +
-          '\n' +
-          '::: hljs-right\n' +
-          '\n' +
-          '居右\n' +
-          '\n' +
-          ':::\n' +
-          '\n' +
-          '> 段落引用\n' +
-          '\n' +
-          '1. asd\n' +
-          '\n' +
-          '- asd\n' +
-          '\n' +
-          '|column1|column2|column3|\n' +
-          '|-|-|-|\n' +
-          '|content1|content2|content3|\n' +
-          '\n' +
-          '\n' +
-          '\n' +
-          '\n' +
-          '\n' +
-          '\n' +
-          '\n'
-      }
-    },
-  }
-</script>
+<!--<script>-->
+<!--  import ShowContent from './showContent'-->
+<!--  export default {-->
+<!--    name: 'test',-->
+<!--    components: {ShowContent},-->
+<!--    data(){-->
+<!--      return {-->
+<!--        markdownText:'**这是一次保存内容**\n' +-->
+<!--          '==标记==\n' +-->
+<!--          '\n' +-->
+<!--          '~~中划线~~\n' +-->
+<!--          '\n' +-->
+<!--          '<u>++下划线++</u>\n' +-->
+<!--          '\n' +-->
+<!--          '^上角标^asd\n' +-->
+<!--          '\n' +-->
+<!--          '~下角标~asd\n' +-->
+<!--          '\n' +-->
+<!--          '::: hljs-left\n' +-->
+<!--          '\n' +-->
+<!--          '居左\n' +-->
+<!--          '\n' +-->
+<!--          ':::\n' +-->
+<!--          '::: hljs-center\n' +-->
+<!--          '\n' +-->
+<!--          '居中\n' +-->
+<!--          '\n' +-->
+<!--          ':::\n' +-->
+<!--          '\n' +-->
+<!--          '::: hljs-right\n' +-->
+<!--          '\n' +-->
+<!--          '居右\n' +-->
+<!--          '\n' +-->
+<!--          ':::\n' +-->
+<!--          '\n' +-->
+<!--          '> 段落引用\n' +-->
+<!--          '\n' +-->
+<!--          '1. asd\n' +-->
+<!--          '\n' +-->
+<!--          '- asd\n' +-->
+<!--          '\n' +-->
+<!--          '|column1|column2|column3|\n' +-->
+<!--          '|-|-|-|\n' +-->
+<!--          '|content1|content2|content3|\n' +-->
+<!--          '\n' +-->
+<!--          '\n' +-->
+<!--          '\n' +-->
+<!--          '\n' +-->
+<!--          '\n' +-->
+<!--          '\n' +-->
+<!--          '\n'-->
+<!--      }-->
+<!--    },-->
+<!--  }-->
+<!--</script>-->
 
-<style scoped>
+<!--<style scoped>-->
 
-</style>
+<!--</style>-->
