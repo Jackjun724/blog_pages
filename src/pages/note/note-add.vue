@@ -41,6 +41,7 @@
               <el-date-picker
                   placeholder="选择日期"
                   type="datetime"
+                  value-format="yyyy-MM-dd HH:mm:ss"
                   v-model="noteForm.publishTime">
               </el-date-picker>
             </el-form-item>
