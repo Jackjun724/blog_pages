@@ -145,7 +145,7 @@
       //报表
       this.$fetch.commonApi.getDashboardData().then(resp => {
         let response = resp.data.data
-        _this.weekVisits = response.charts.weekVisits[0]
+        _this.weekVisits = response.charts.weekVisits
         _this.wordCloudList = response.tags
         _this.dayVisitsNum = response.dayVisitsNum
         _this.weekVisitsNum = response.weekVisitsNum

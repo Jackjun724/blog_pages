@@ -53,23 +53,23 @@ export const asyncRouterMapper = [
       }
     ]
   },
-  {
-    path: '/reply',
-    name: 'reply-manager',
-    component: layout,
-    redirect: '/reply/list',
-    meta: {title: '评论管理'},
-    icon:'el-jack-icon-reply',
-    children: [
-      {
-        path:'/reply/list',
-        name:'reply-list',
-        icon:'el-jack-icon-list-rich',
-        meta:{title:'评论列表'},
-        component: () => import('@/pages/reply/reply-list')
-      },
-    ]
-  },
+  // {
+  //   path: '/reply',
+  //   name: 'reply-manager',
+  //   component: layout,
+  //   redirect: '/reply/list',
+  //   meta: {title: '评论管理'},
+  //   icon:'el-jack-icon-reply',
+  //   children: [
+  //     {
+  //       path:'/reply/list',
+  //       name:'reply-list',
+  //       icon:'el-jack-icon-list-rich',
+  //       meta:{title:'评论列表'},
+  //       component: () => import('@/pages/reply/reply-list')
+  //     },
+  //   ]
+  // },
   {
     path: '/tags',
     name: 'tags-manager',

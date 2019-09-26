@@ -27,7 +27,8 @@
               name="password"
               max="16"
               v-model="loginForm.password"
-              icon="pwd">
+              icon="pwd"
+              @enter="handleLogin">
               密码
             </md-input>
           </el-form-item>
