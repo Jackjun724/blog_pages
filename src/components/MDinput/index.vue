@@ -64,7 +64,8 @@
         class="material-input"
         @focus="handleMdFocus"
         @blur="handleMdBlur"
-        @input="handleModelInput">
+        @input="handleModelInput"
+        @keyup.enter="handleMdKeyEnter">
       <input
         v-if="type === 'tel'"
         :name="name"
@@ -186,6 +187,9 @@ export default {
           this.$parent.$emit('el.form.blur', [this.currentValue])
         }
       }
+    },
+    handleMdKeyEnter(){
+      this.$emit("enter")
     }
   }
 }
