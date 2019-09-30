@@ -98,7 +98,9 @@
 <script>
   import mdInput from '@/components/MDinput/index'
   import MavonEditor from 'mavon-editor'
+  import Vue from 'vue'
   import 'mavon-editor/dist/css/index.css'
+  Vue.use(MavonEditor)
 
   export default {
     name: 'noteAdd',
@@ -189,7 +191,6 @@
     },
     components: {
       mdInput,
-      MavonEditor
     },
     created () {
       let _this = this
