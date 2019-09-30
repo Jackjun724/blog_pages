@@ -97,6 +97,8 @@
 
 <script>
   import mdInput from '@/components/MDinput/index'
+  import MavonEditor from 'mavon-editor'
+  import 'mavon-editor/dist/css/index.css'
 
   export default {
     name: 'noteAdd',
@@ -186,7 +188,8 @@
       }
     },
     components: {
-      mdInput
+      mdInput,
+      MavonEditor
     },
     created () {
       let _this = this
