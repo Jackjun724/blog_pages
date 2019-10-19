@@ -13,7 +13,7 @@
           列
           <el-input-number class="number-input" :min="1" :max="10" v-model="col" label="列"></el-input-number>
         </label>
-        <a :href="href" target="_blank" v-show="false" id="target-buy"></a>
+        <a :href="href" target="_blank" v-show="false" id="target-buy"><span></span></a>
         <el-button @click="submit" type="primary">提交</el-button>
       </el-card>
     </el-col>
