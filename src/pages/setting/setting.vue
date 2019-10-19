@@ -1,6 +1,6 @@
 <template>
   <section>
-    <el-col :span="8">
+    <el-col :xs="24" :md="8" :xl="8">
       <el-card>
         <template v-slot:header>
           模拟请求工具
