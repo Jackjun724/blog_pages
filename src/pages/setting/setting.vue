@@ -13,6 +13,7 @@
           列
           <el-input-number class="number-input" :min="1" :max="10" v-model="col" label="列"></el-input-number>
         </label>
+        <a :href="href" v-show="false" id="target-buy"></a>
         <el-button @click="submit" type="primary">提交</el-button>
       </el-card>
     </el-col>
@@ -26,7 +27,8 @@
     data () {
       return {
         row: null,
-        col: null
+        col: null,
+        href: ''
       }
     },
     methods:{
@@ -37,8 +39,11 @@
             row:this.row
           }
         }
+        let _this = this
+        const el = document.querySelector('#target-buy')
         Submit(param).then(resp=>{
-          window.open(resp.data.data)
+          _this.href = resp.data.data
+          el.click()
         })
       }
     }
