@@ -100,6 +100,8 @@
   import MavonEditor from 'mavon-editor'
   import Vue from 'vue'
   import 'mavon-editor/dist/css/index.css'
+  import MarkdownIt from 'markdown-it'
+
   Vue.use(MavonEditor)
 
   export default {
@@ -169,17 +171,27 @@
           if (this.$route.params.id) {
             // 路由中存在ID属性  更新文章
             _this.noteForm.id = _this.$route.params.id
-            _this.$fetch.noteApi.updateNote(_this.noteForm).then(resp => {
+            let param = {..._this.noteForm}
+            _this.loading = true
+            param.html = _this.convertMarkdown2Html(param.content)
+            _this.$fetch.noteApi.updateNote(param).then(resp => {
               _this.$notify.success('修改成功!')
               //清空保存记录 返回列表
               localStorage.setItem('SaveDraft', '')
               this.$router.push({path: '/note/list'})
+            }).finally(() => {
+              _this.loading = false
             })
           } else {
-            _this.$fetch.noteApi.publishNote(_this.noteForm).then(resp => {
+            let param = {..._this.noteForm}
+            _this.loading = true
+            param.html = _this.convertMarkdown2Html(param.content)
+            _this.$fetch.noteApi.publishNote(param).then(resp => {
               _this.$notify.success('提交成功!')
               localStorage.setItem('SaveDraft', '')
               this.$router.push({path: '/note/list'})
+            }).finally(() => {
+              _this.loading = false
             })
           }
         })
@@ -187,7 +199,32 @@
       $uploadImg (fileName, file) {
         //TODO IMAGE UPLOAD
         this.$refs.md.$img2Url(fileName, 'https://tycoding.cn/author/avatar.png')
-      }
+      },
+      convertMarkdown2Html (mdText) {
+        let tool = MarkdownIt({
+          highlight: (str, lang) => {
+            if (lang && hljs.getLanguage(lang)) {
+              try {
+                return '<div class="code-pre">' + hljs.highlight(lang, str).value + '</div>'
+              } catch (_) {
+              }
+            }
+            return ''
+          }
+        })
+        tool.renderer.rules.heading_open = function (tokens, idx) {
+          let tag = tokens[idx].tag
+          if (tag === 'h1' || tag === 'h2' || tag === 'h3') {
+            return `<${tag} id="a-${idx}" class="heading"><a href="#a-${idx}" class="anchor">#</a>`
+          }
+          return `<${tag}>`
+        }
+        tool.renderer.rules.link_open = function (tokens, idx) {
+          let attr = tool.renderer.renderAttrs(tokens[idx])
+          return `<a class="link" title="点击传送" ${attr} target="_blank">`
+        }
+        return tool.render(mdText)
+      },
     },
     components: {
       mdInput,
