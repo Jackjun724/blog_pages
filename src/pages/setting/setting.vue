@@ -13,8 +13,8 @@
           列
           <el-input-number class="number-input" :min="1" :max="10" v-model="col" label="列"></el-input-number>
         </label>
-        <a :href="href" target="_blank" v-show="false" id="target-buy"><span></span></a>
         <el-button @click="submit" type="primary">提交</el-button>
+        <a :href="href" target="_blank" v-show="href" id="target-buy"><el-button type="danger">Go</el-button></a>
       </el-card>
     </el-col>
   </section>
@@ -40,10 +40,8 @@
           }
         }
         let _this = this
-        const el = document.querySelector('#target-buy span')
         Submit(param).then(resp=>{
           _this.href = resp.data.data
-          el.click()
         })
       }
     }
@@ -58,5 +56,10 @@
   .number-input{
     margin-bottom:20px;
     display: block;
+  }
+
+  #target-buy{
+    text-decoration: none;
+    display: inline-block;
   }
 </style>
