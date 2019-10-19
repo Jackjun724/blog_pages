@@ -52,7 +52,7 @@ Axios.interceptors.response.use(
             message: '请先登录!',
             type: 'warning'
           })
-          localStorage.removeItem('token');
+          localStorage.removeItem(Constants.tokenItemName);
           router.push({path: '/login'})
           break;
         // 403 token过期
@@ -65,7 +65,7 @@ Axios.interceptors.response.use(
             type: 'warning'
           })
           // 清除token
-          localStorage.removeItem('token');
+          localStorage.removeItem(Constants.tokenItemName);
           router.push({path: '/login'})
           break;
         // 404请求不存在
@@ -77,8 +77,12 @@ Axios.interceptors.response.use(
           break;
         // 其他错误，直接抛出错误提示
         default:
+          let msg = '未知错误！'
+          if(error.response.data){
+            msg = error.response.data.message
+          }
           Notification({
-            message: error.response.data.message,
+            message: msg,
             type: 'warning'
           })
       }

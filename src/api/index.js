@@ -2,12 +2,14 @@ import * as commonApi from './modules/api-list'
 import * as noteApi from './modules/note-api'
 import * as tagApi from './modules/tag-api'
 import * as fileApi from './modules/file-api'
+import * as SystemApi from './modules/system'
 
 const apiObj = {
   commonApi,
   noteApi,
   tagApi,
-  fileApi
+  fileApi,
+  SystemApi
 }
 
 const install = function (Vue) {
