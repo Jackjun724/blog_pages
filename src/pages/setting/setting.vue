@@ -40,7 +40,7 @@
           }
         }
         let _this = this
-        const el = document.querySelector('#target-buy')
+        const el = document.querySelector('#target-buy span')
         Submit(param).then(resp=>{
           _this.href = resp.data.data
           el.click()
