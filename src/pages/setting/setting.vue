@@ -8,7 +8,7 @@
         <label>
           GOODS
           <el-select v-model="id" class="number-input">
-            <el-option v-for="item in goods" :value="item.goods_id" :key="item.goods_id">
+            <el-option v-for="item in goods" :value="item.goods_id" :label="item.goods_name" :key="item.goods_id">
               {{item.goods_name}}
             </el-option>
           </el-select>
