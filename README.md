@@ -15,7 +15,7 @@ Vue2.x + ElementUI
 暂时不提供账号密码。
 
 ## 后台图片
-![image1](/Jackjun724/blog_pages/master/img1.png?raw=true)
+![image1](https://github.com/Jackjun724/blog_pages/blob/master/img1.png?raw=true)
 
 ## Build Setup
 
