@@ -16,6 +16,11 @@ Vue2.x + ElementUI
 
 ## 后台图片
 ![image1](https://github.com/Jackjun724/blog_pages/blob/master/img1.png?raw=true)
+![image2](https://github.com/Jackjun724/blog_pages/blob/master/img2.png?raw=true)
+![image3](https://github.com/Jackjun724/blog_pages/blob/master/img3.png?raw=true)
+![image4](https://github.com/Jackjun724/blog_pages/blob/master/img4.png?raw=true)
+![image5](https://github.com/Jackjun724/blog_pages/blob/master/img5.png?raw=true)
+![image6](https://github.com/Jackjun724/blog_pages/blob/master/img6.png?raw=true)
 
 ## Build Setup
 
