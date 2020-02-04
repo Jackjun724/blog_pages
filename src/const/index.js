@@ -13,7 +13,7 @@ export default {
     if (process.env.NODE_ENV === 'development') {
       return 'http://localhost:7999/'
     } else if (process.env.NODE_ENV === 'production') {
-      return 'http://www.luckyvv.cn/'
+      return 'http://www.retzero.com/'
     }
   },
 }
