@@ -19,7 +19,7 @@
     "screenfull": "^4.1.0",
     "vue-router": "^3.0.1",
     "wordcloud": "^1.1.0",
-    "markdown-it": "^10.0.0"
+    "markdown-it": "^12.3.2"
   },
   "devDependencies": {
     "scss": "^0.2.4",
